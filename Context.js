@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState("");
+  const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const register = (email, password) => {
     setIsLoading(true);
@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
         password: password,
       })
       .then((response) => {
-        setToken(response.data.token);
+        setUserInfo(response.data);
         AsyncStorage.setItem("token", JSON.stringify(token));
         setIsLoading(false);
 
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         isLoading,
-        token,
+        userInfo,
         register,
       }}
     >

@@ -13,17 +13,14 @@ import { AuthContext, AuthProvider } from "./Context";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-  const { token } = useContext(AuthContext);
+  const { userInfo } = useContext(AuthContext);
 
   return (
     <AuthProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          {token ? (
-            <Stack.Screen name="UsersHome" component={UsersHome} />
-          ) : (
-            <Stack.Screen name="Login" component={Login} />
-          )}
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="UsersHome" component={UsersHome} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>
